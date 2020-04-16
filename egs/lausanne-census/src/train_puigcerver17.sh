@@ -25,7 +25,7 @@ adaptive_pooling="avgpool-16";
 fixed_height=128;
 # Trainer parameters
 add_logsoftmax_to_loss=true;
-batch_size=10;
+batch_size=32;
 checkpoint="ckpt.lowest-valid-cer*";
 early_stop_epochs=20;
 gpu=1;
@@ -114,12 +114,12 @@ source "../utils/parse_options.inc.sh" || exit 1;
 #fi;
 
 check_all_files \
-  data/lang/puigcerver/lines/char/tr.txt \
-  data/lang/puigcerver/lines/char/va.txt;
+  data/lang/split/tr.txt \
+  data/lang/split/va.txt;
 
 mkdir -p "$exper_path";
 [ -s "$exper_path"/syms_ctc.txt ] ||
-cut -d\  -f2- data/lang/puigcerver/lines/char/{tr,va}.txt | tr \  \\n |
+cut -d\  -f2- data/lang/split/{tr,va}.txt | tr \  \\n |
 sort -u | awk 'BEGIN{ print "<ctc>", 0; }{ print $1, NR; }' \
   > "$exper_path/syms_ctc.txt";
 
@@ -152,8 +152,8 @@ pylaia-htr-create-model \
 pylaia-htr-train-ctc \
   "$exper_path/syms_ctc.txt" \
   $img_directories \
-  data/lang/puigcerver/lines/char/tr.txt \
-  data/lang/puigcerver/lines/char/va.txt \
+  data/lang/split/tr.txt \
+  data/lang/split/va.txt \
   --add_logsoftmax_to_loss "$add_logsoftmax_to_loss" \
   --batch_size "$batch_size" \
   --checkpoint "$checkpoint" \
