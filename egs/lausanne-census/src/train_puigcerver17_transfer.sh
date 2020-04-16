@@ -9,7 +9,7 @@ source ../utils/functions_check.inc.sh || exit 1;
 
 
 # General parameters
-exper_path=exper/puigcerver17/train;
+exper_path=exper/puigcerver17_transfer/train;
 # Model parameters
 cnn_num_features="16 32 48 64 80";
 cnn_kernel_size="3 3 3 3 3";
@@ -25,7 +25,7 @@ adaptive_pooling="avgpool-16";
 fixed_height=128;
 # Trainer parameters
 add_logsoftmax_to_loss=true;
-batch_size=10;
+batch_size=32;
 checkpoint="ckpt.lowest-valid-cer*";
 early_stop_epochs=20;
 gpu=1;
@@ -37,6 +37,7 @@ seed=0x12345;
 show_progress_bar=true;
 use_baidu_ctc=false;
 use_distortions=false;
+pretrained_checkpoint="../iam-htr/exper/puigcerver17/train/experiment.ckpt.lowest-valid-cer-97"
 help_message="
 Usage: ${0##*/} [options]
 
@@ -104,6 +105,8 @@ Options:
                                spaces.
   --checkpoint               : (type = str, default = $checkpoint)
                                Suffix of the checkpoint to use, can be a glob pattern.
+  --pretrained_checkpoint    : (type = str, default = $pretrained_checkpoint)
+                               Absolute or relative path to the pretrained_checkpoint
 ";
 source "../utils/parse_options.inc.sh" || exit 1;
 [ $# -ne 0 ] && echo "$help_message" >&2 && exit 1;
@@ -114,12 +117,12 @@ source "../utils/parse_options.inc.sh" || exit 1;
 #fi;
 
 check_all_files \
-  data/lang/puigcerver/lines/char/tr.txt \
-  data/lang/puigcerver/lines/char/va.txt;
+  data/lang/split/tr.txt \
+  data/lang/split/va.txt;
 
 mkdir -p "$exper_path";
 [ -s "$exper_path"/syms_ctc.txt ] ||
-cut -d\  -f2- data/lang/puigcerver/lines/char/{tr,va}.txt | tr \  \\n |
+cut -d\  -f2- data/lang/split/{tr,va}.txt | tr \  \\n |
 sort -u | awk 'BEGIN{ print "<ctc>", 0; }{ print $1, NR; }' \
   > "$exper_path/syms_ctc.txt";
 
@@ -152,8 +155,9 @@ pylaia-htr-create-model \
 pylaia-htr-train-ctc \
   "$exper_path/syms_ctc.txt" \
   $img_directories \
-  data/lang/puigcerver/lines/char/tr.txt \
-  data/lang/puigcerver/lines/char/va.txt \
+  data/lang/split/tr.txt \
+  data/lang/split/va.txt \
+  --pretrained_checkpoint "$pretrained_checkpoint"\
   --add_logsoftmax_to_loss "$add_logsoftmax_to_loss" \
   --batch_size "$batch_size" \
   --checkpoint "$checkpoint" \

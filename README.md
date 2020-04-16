@@ -43,3 +43,10 @@ with `pip install -r requirements.txt`.
 For instance, typically ImageMagick is used to process images, or Kaldi
 is employed to perform Viterbi decoding (and lattice generation) combining
 the output of the neural network with a n-gram language model.
+
+# Modifications
+
+- Added args `pretrained_checkpoint` in `pylaia-htr-train-ctc` to use a pretrained checkpoint.
+- Created a new experiment for iam-htr with batch norm and distortion (data augmentation), gain of 2-3% CER.
+- Create a new dataset, `lausanne-census`, for Lausanne census data with relevant data preparation scripts and experiments.
+

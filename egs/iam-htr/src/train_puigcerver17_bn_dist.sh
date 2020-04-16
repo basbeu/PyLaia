@@ -9,7 +9,7 @@ source ../utils/functions_check.inc.sh || exit 1;
 
 
 # General parameters
-exper_path=exper/puigcerver17/train;
+exper_path=exper/puigcerver17_bn_dist/train;
 # Model parameters
 cnn_num_features="16 32 48 64 80";
 cnn_kernel_size="3 3 3 3 3";
@@ -18,14 +18,14 @@ cnn_dilation="1 1 1 1 1";
 cnn_activations="LeakyReLU LeakyReLU LeakyReLU LeakyReLU LeakyReLU";
 cnn_poolsize="2 2 2 0 0";
 cnn_dropout="0 0 0 0 0";
-cnn_batchnorm="f f f f f";
+cnn_batchnorm="t t t t t";
 rnn_units=256;
 rnn_layers=5;
 adaptive_pooling="avgpool-16";
 fixed_height=128;
 # Trainer parameters
 add_logsoftmax_to_loss=true;
-batch_size=10;
+batch_size=16;
 checkpoint="ckpt.lowest-valid-cer*";
 early_stop_epochs=20;
 gpu=1;
@@ -36,7 +36,7 @@ save_checkpoint_interval=10;
 seed=0x12345;
 show_progress_bar=true;
 use_baidu_ctc=false;
-use_distortions=false;
+use_distortions=true;
 help_message="
 Usage: ${0##*/} [options]
 
