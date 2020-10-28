@@ -50,3 +50,23 @@ the output of the neural network with a n-gram language model.
 - Created a new experiment for iam-htr with batch norm and distortion (data augmentation), gain of 2-3% CER.
 - Create a new dataset, `lausanne-census`, for Lausanne census data with relevant data preparation scripts and experiments.
 
+# FDH Project - Decipher venice
+
+## Train on IAM
+
+Using the code that is in egs/iam-htr.
+
+1. Install PyLaia as above 
+2. Install dependencies (see [IAM example for HTR](egs/iam-htr))
+    - [ImageMagick](https://www.imagemagick.org/):
+  Needed for processing the images.
+    - [imgtxtenh](https://github.com/mauvilsa/imgtxtenh):
+  Needed for processing the images.
+    - gawk
+2. Put iam dataset in egs/iam-htr/data/original
+3. Put iam splits in egs/iam-htr/splits
+    - Downloaded from [here](https://www.prhlt.upv.es/~jpuigcerver/iam_splits.tar.gz)
+4. Run egs/iam-htr/src/prepare_images.sh (It takes the images from the folder original. It put prepared images in imgs)
+5. Run egs/iam-htr/src/prepare_texts.sh  (It takes text from original. It put prepared text in lang. It needs the splits folder)
+6. Run egs/iam-htr/src/train_puigcerver17_bn_dist.sh (train the model) (Duration of training on GeForce GTX TITAN X, 12 GB = )
+    
