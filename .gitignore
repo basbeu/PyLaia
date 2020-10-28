@@ -112,3 +112,6 @@ kk/
 
 # Project specific files
 laia/version.py
+
+# dataset
+egs/decipher-venice/data/
