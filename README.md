@@ -60,14 +60,16 @@ WER : Words Error Rate
 ### Datatset description
 
 Images :
-    - lines
-    - sentences
-    - words
+
+- lines
+- sentences
+- words
+
 Text :
-    - forms.txt : global index of the dataset
-    - lines.txt : descriptions and transcriptions of lines images
-    - sentences.txt : descriptions and transcriptions of sentences images
-    - words.txt : descriptions and transcriptions of words images
+- forms.txt : global index of the dataset
+- lines.txt : descriptions and transcriptions of lines images
+- sentences.txt : descriptions and transcriptions of sentences images
+- words.txt : descriptions and transcriptions of words images
     
 
 ### Training pipeline
