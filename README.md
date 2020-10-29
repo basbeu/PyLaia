@@ -52,7 +52,25 @@ the output of the neural network with a n-gram language model.
 
 # FDH Project - Decipher venice
 
+CER : Characters Error Rate 
+WER : Words Error Rate
+
 ## Train on IAM
+
+### Datatset description
+
+Images :
+    - lines
+    - sentences
+    - words
+Text :
+    - forms.txt : global index of the dataset
+    - lines.txt : descriptions and transcriptions of lines images
+    - sentences.txt : descriptions and transcriptions of sentences images
+    - words.txt : descriptions and transcriptions of words images
+    
+
+### Training pipeline
 
 Using the code that is in egs/iam-htr.
 
@@ -66,7 +84,20 @@ Using the code that is in egs/iam-htr.
 2. Put iam dataset in egs/iam-htr/data/original
 3. Put iam splits in egs/iam-htr/splits
     - Downloaded from [here](https://www.prhlt.upv.es/~jpuigcerver/iam_splits.tar.gz)
-4. Run egs/iam-htr/src/prepare_images.sh (It takes the images from the folder original. It put prepared images in imgs)
-5. Run egs/iam-htr/src/prepare_texts.sh  (It takes text from original. It put prepared text in lang. It needs the splits folder)
-6. Run egs/iam-htr/src/train_puigcerver17_bn_dist.sh (train the model) (Duration of training on GeForce GTX TITAN X, 12 GB = )
-    
+    - It contains several splits of the dataset (training set, validation set, test set) already used in several papers 
+4. Run egs/iam-htr/src/prepare_images.sh
+    - It takes the images from the folder original (lines and sentences). It put prepared images in imgs
+    - Step 1 : cleaning, enhancing of the images (output : data/imgs/lines or data/imgs/sentences/)
+    - Step 2 : resizing of the images (output : data/imgs/lines_h128 or data/imgs/sentences_h128/)
+5. Run egs/iam-htr/src/prepare_texts.sh  
+    - It takes text from original. It put prepared text in lang. It needs the splits folder
+    - Text preparation includes : removing spaces in words, replacing | by space ,.. 
+    - It directly puts the text in the different splits folder for both words and character levels
+6. Run egs/iam-htr/src/train_puigcerver17_bn_dist.sh (train the model) (training on GeForce GTX TITAN X with 12 GB)
+    - create egs/iam-htr/exper/puigcerver17_bn_dist
+    - store num_rolling_checkpoins relevant checkpoints (when new lowest CER and WER are reached, and each 10 epochs)
+    - store logs model and syms_ctc.txt ()
+7. Run egs/iam-htr/src/decode_net
+    - Evaluate the model on validation and training set
+    - Store results in egs/iam-htr/decode
+    - It does not compute CER/WER if kaldi is not installed
