@@ -13,7 +13,7 @@ gpu=1;
 checkpoint="experiment.ckpt.lowest-valid-cer*";
 fixed_height=true;
 lang=puigcerver;
-exper_path=exper/puigcerver17/train;
+exper_path=./exper/puigcerver17_bn_dist/train;
 help_message="
 Usage: ${0##*/} [options]
 
