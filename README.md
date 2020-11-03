@@ -60,16 +60,14 @@ WER : Words Error Rate
 ### Datatset description
 
 Images :
-
-- lines
-- sentences
-- words
-
+    - lines
+    - sentences
+    - words
 Text :
-- forms.txt : global index of the dataset
-- lines.txt : descriptions and transcriptions of lines images
-- sentences.txt : descriptions and transcriptions of sentences images
-- words.txt : descriptions and transcriptions of words images
+    - forms.txt : global index of the dataset
+    - lines.txt : descriptions and transcriptions of lines images
+    - sentences.txt : descriptions and transcriptions of sentences images
+    - words.txt : descriptions and transcriptions of words images
     
 
 ### Training pipeline
@@ -97,8 +95,9 @@ Using the code that is in egs/iam-htr.
     - It directly puts the text in the different splits folder for both words and character levels
 6. Run egs/iam-htr/src/train_puigcerver17_bn_dist.sh (train the model) (training on GeForce GTX TITAN X with 12 GB)
     - create egs/iam-htr/exper/puigcerver17_bn_dist
-    - store num_rolling_checkpoins relevant checkpoints (when new lowest CER and WER are reached, and each 10 epochs)
-    - store logs model and syms_ctc.txt ()
+    - Store num_rolling_checkpoins relevant checkpoints (when new lowest CER and WER are reached, and each 10 epochs)
+    - Store logs model
+    - Store the symbol table in syms_ctc.txt 
 7. Run egs/iam-htr/src/decode_net
     - Evaluate the model on validation and training set
     - Store results in egs/iam-htr/decode
