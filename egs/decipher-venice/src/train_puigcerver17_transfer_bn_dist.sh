@@ -37,7 +37,7 @@ seed=0x12345;
 show_progress_bar=true;
 use_baidu_ctc=false;
 use_distortions=true;
-pretrained_checkpoint="../iam-htr/exper/puigcerver17_bn_dist/train/experiment.ckpt.lowest-valid-cer-106"
+pretrained_checkpoint="../iam-htr/exper/puigcerver17_bn_dist/train/experiment.ckpt.lowest-valid-cer-54"
 help_message="
 Usage: ${0##*/} [options]
 
@@ -111,10 +111,7 @@ Options:
 source "../utils/parse_options.inc.sh" || exit 1;
 [ $# -ne 0 ] && echo "$help_message" >&2 && exit 1;
 
-#if [ $gpu -gt 0 ]; then
-#  export CUDA_VISIBLE_DEVICES=$((gpu-1));
-#  gpu=1;
-#fi;
+export CUDA_VISIBLE_DEVICES=$gpu
 
 check_all_files \
   data/lang/split/tr.txt \

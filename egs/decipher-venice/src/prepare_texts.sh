@@ -31,7 +31,7 @@ num_lines_original=$(find "data/original" -name "*.txt" | wc -l)
 num_lines_computed=$(cat "$all_ch" | wc -l || 0)
 
 [[ "$overwrite" = false && -s "$all_ch" && "$num_lines_original" -eq "$num_lines_computed" ]] ||
-for filename in data/original/*/*.txt; do
+for filename in data/original/*.txt; do
   echo "$(basename $filename .jpg.txt)" "$(cat $filename | tr " " "@wspace" | sed 's/\(.\)/\1 /g' | sed 's/\s$//')"
 done | sort -k1 > "$all_ch";
 

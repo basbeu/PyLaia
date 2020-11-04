@@ -102,3 +102,29 @@ Using the code that is in egs/iam-htr.
     - Evaluate the model on validation and training set
     - Store results in egs/iam-htr/decode
     - It does not compute CER/WER if kaldi is not installed
+8. We can evaluate the model with egs/iam-htr/src/Evalutation.ipynb
+    
+## Transfer learning on VTM dataset
+
+Based on the code that was in egs/lausanne-census, but work on folder egs/decipher-venice
+
+### Datatset description 
+The VTM dataset consists of images paired with a transcription.
+
+Images are JPEG files and transcription are TXT files. Each files of the pair has the same id as filename.
+
+### Pipeline
+
+1. Copy the vtm dataset in egs/decipher-venice/data/original
+2. Prepare images : run egs/decipher-venice/src/prepare_images.sh
+    - if imgtxtenh is missing : export PATH=/usr/local/bin:$PATH
+    - do the same thing as /iam-htr/src/prepare_images.sh
+    - output in egs/decipher-venice/data/imgs/lines and egs/decipher-venice/data/imgs/lines_h128 
+3. Split : run egs/decipher-venice/src/split_data.sh
+    - output : egs/decipher-venice/data/splits
+    - 3 files : te.lst, tr.lst, va.lst
+4. Prepare texts : run egs/decipher-venice/src/prepare_texts.sh
+    - output : lang/all/char.txt
+5. In egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh point to the right checkpoint to begin the training. The variable to update is the pretrained_checkpoint.
+6. Train : run egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh
+7.
