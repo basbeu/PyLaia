@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e;
 
+export LANG=C.UTF-8
+
 # Directory where the script is placed.
 source "../utils/functions_check.inc.sh" || exit 1;
 

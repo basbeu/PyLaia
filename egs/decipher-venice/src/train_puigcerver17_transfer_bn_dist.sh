@@ -8,6 +8,8 @@ cd "$(dirname "${BASH_SOURCE[0]}")/..";
 source ../utils/functions_check.inc.sh || exit 1;
 
 
+export CUDA_VISIBLE_DEVICES=4
+
 # General parameters
 exper_path=exper/puigcerver17_transfer_bn_dist/train;
 # Model parameters
@@ -111,7 +113,6 @@ Options:
 source "../utils/parse_options.inc.sh" || exit 1;
 [ $# -ne 0 ] && echo "$help_message" >&2 && exit 1;
 
-export CUDA_VISIBLE_DEVICES=$gpu
 
 check_all_files \
   data/lang/split/tr.txt \

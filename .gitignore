@@ -115,3 +115,4 @@ laia/version.py
 
 # dataset
 egs/decipher-venice/data/
+egs/decipher-venice/exper/

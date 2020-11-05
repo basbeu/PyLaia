@@ -125,6 +125,10 @@ Images are JPEG files and transcription are TXT files. Each files of the pair ha
     - 3 files : te.lst, tr.lst, va.lst
 4. Prepare texts : run egs/decipher-venice/src/prepare_texts.sh
     - output : lang/all/char.txt
-5. In egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh point to the right checkpoint to begin the training. The variable to update is the pretrained_checkpoint.
-6. Train : run egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh
-7.
+    - Potential problems : encoding
+5. Transform texts run egs/decipher-venice/src/prepare_text_stage2.py
+    - remove .txt in ids
+6. In egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh point to the right checkpoint to begin the training. The variable to update is the pretrained_checkpoint.
+7. Train : run egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh
+    - specify the GPU !!!
+8.
