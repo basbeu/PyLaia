@@ -60,14 +60,15 @@ WER : Words Error Rate
 ### Datatset description
 
 Images :
-    - lines
-    - sentences
-    - words
+- lines
+- sentences
+- words
+
 Text :
-    - forms.txt : global index of the dataset
-    - lines.txt : descriptions and transcriptions of lines images
-    - sentences.txt : descriptions and transcriptions of sentences images
-    - words.txt : descriptions and transcriptions of words images
+- forms.txt : global index of the dataset
+- lines.txt : descriptions and transcriptions of lines images
+- sentences.txt : descriptions and transcriptions of sentences images
+- words.txt : descriptions and transcriptions of words images
     
 
 ### Training pipeline
@@ -103,7 +104,9 @@ Using the code that is in egs/iam-htr.
     - Store results in egs/iam-htr/decode
     - It does not compute CER/WER if kaldi is not installed
 8. We can evaluate the model with egs/iam-htr/src/Evalutation.ipynb
-    
+    - experiment.ckpt.lowest-valid-cer-54 CER : 0.0716 WER : 0.228
+
+
 ## Transfer learning on VTM dataset
 
 Based on the code that was in egs/lausanne-census, but work on folder egs/decipher-venice
@@ -114,6 +117,8 @@ The VTM dataset consists of images paired with a transcription.
 Images are JPEG files and transcription are TXT files. Each files of the pair has the same id as filename.
 
 ### Pipeline
+
+#### Training
 
 1. Copy the vtm dataset in egs/decipher-venice/data/original
 2. Prepare images : run egs/decipher-venice/src/prepare_images.sh
@@ -131,4 +136,12 @@ Images are JPEG files and transcription are TXT files. Each files of the pair ha
 6. In egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh point to the right checkpoint to begin the training. The variable to update is the pretrained_checkpoint.
 7. Train : run egs/decipher-venice/src/train_puigcerver17_transfer_bn_dist.sh
     - specify the GPU !!!
-8.
+8. Evaluate with egs/decipher-venice/src/Evalutation.ipynb
+    - experiment.ckpt.lowest-valid-cer-31 CER : 0.05097 WER : 0.192
+    
+#### Decipher sommarioni
+1. Segment patch in the images
+2. Copy patch in egs/decipher-venice/data/sommarioni/reg#
+3. Run egs/decipher-venice/src/prepare_sommarioni.sh
+4. See the results in egs/decipher-venice/src/Decipher_sommarioni.ipynb
+
