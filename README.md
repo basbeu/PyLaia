@@ -140,8 +140,8 @@ Images are JPEG files and transcription are TXT files. Each files of the pair ha
     - experiment.ckpt.lowest-valid-cer-31 CER : 0.05097 WER : 0.192
     
 #### Decipher sommarioni
-1. Segment patch in the images
-2. Copy patch in egs/decipher-venice/data/sommarioni/reg#
+1. Segment patch in the images (see /P2PaLA/extractPatches.py)
+2. Copy patch in egs/decipher-venice/data/sommarioni/reg# OR put the rights paths in egs/decipher-venice/src/prepare_sommarioni.sh
 3. Run egs/decipher-venice/src/prepare_sommarioni.sh
 4. See the results in egs/decipher-venice/src/Decipher_sommarioni.ipynb
 
