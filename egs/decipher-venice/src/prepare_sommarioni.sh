@@ -24,7 +24,7 @@ Options:
                     Resize the line and sentence images to this given height.
 ";
 source ../utils/parse_options.inc.sh || exit 1;
-
+export PATH=/usr/local/bin:$PATH
 check_imgtxtenh || exit 1;
 check_imagemagick || exit 1;
 
@@ -51,14 +51,14 @@ tmpd="$(mktemp -d)";
 expected_count=(13353 16752 115320);
 bkg_pids=();
 
-img_dir="data/sommarioni/reg1_prepared";
-img_resize_dir="data/sommarioni/reg1_prepared_h${resize_height}";
+img_dir="data/sommarioni/reg07/patch_prepared";
+img_resize_dir="data/sommarioni/reg07/patch_prepared_h${resize_height}";
 mkdir -p "${img_dir}" "${img_resize_dir}";
 actual_count="$(find "$img_resize_dir" -name "*.jpg" | wc -l)";
 [[ "$overwrite" = false && "$actual_count" -eq "${expected_count[p-1]}" ]] || {
   # Enhance images with Mauricio's tool, deskew the line, crop white borders
   # and resize to the given height.
-  for f in $(find "data/sommarioni/reg1" -name "*.jpg"); do
+  for f in $(find "/dhlabdata4/mion/P2PaLA/sommarioniProcessed/reg07/results/prod/patch" -name "*.jpg"); do
     process_image "$f" &> "$tmpd/${#bkg_pids[@]}" &
     bkg_pids+=("$!");
     [ "${#bkg_pids[@]}" -lt "$num_parallel" ] ||
