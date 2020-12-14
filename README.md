@@ -1,3 +1,8 @@
+This fork of PyLaia is used as 3rd step in a pipelining project in context of course Foundation of Digital Humanities (DH-405) given in fall 2020 at EPFL.
+Refer to the main [repository](https://github.com/Jmion/VeniceTimeMachineSommarioniHTR) of the project to access to the whole pipeline.
+The full documentation and explanation of the project can be found on the [project wiki page](http://fdh.epfl.ch/index.php/Deciphering_Venetian_handwriting).
+To know how to run this step, refer to section FDH Project - Decipher venice below. To install and setup PyLaia refer to the standard starting in PyLaia i.e:[IAM example for HTR](egs/iam-htr).
+
 # PyLaia
 
 [![Build Status](https://travis-ci.com/jpuigcerver/PyLaia.svg?token=HF64eTvPxEUcjjUPXpgm&branch=master)](https://travis-ci.com/jpuigcerver/PyLaia)
@@ -51,9 +56,6 @@ the output of the neural network with a n-gram language model.
 - Create a new dataset, `lausanne-census`, for Lausanne census data with relevant data preparation scripts and experiments.
 
 # FDH Project - Decipher venice
-
-CER : Characters Error Rate 
-WER : Words Error Rate
 
 ## Train on IAM
 
