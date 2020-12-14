@@ -56,7 +56,7 @@ the output of the neural network with a n-gram language model.
 - Create a new dataset, `lausanne-census`, for Lausanne census data with relevant data preparation scripts and experiments.
 
 # FDH Project - Decipher venice
-All instructions below are the exact steps taken during the project
+All instructions below are the exact steps taken during the project in context of course Foundation of Digital Humanities (DH-405) given in fall 2020 at EPFL. 
 
 The training step can be avoided by taking the already [trained model](egs/decipher-venice/exper/puigcerver17_transfer_bn_dist/train/) provided.
 
